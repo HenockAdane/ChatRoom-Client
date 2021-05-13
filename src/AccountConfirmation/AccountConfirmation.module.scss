@@ -1,0 +1,49 @@
+.AccountConfirmation{
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+
+    .container{
+        width: 350px;
+        max-width: 100%;
+        margin: 20px 0 0 0;
+        padding: 10px;
+        border: 1px solid;
+    }
+
+
+    p{
+        font-size: 20px;
+        text-align: center;
+        margin: 0 0 10px 0;
+    }
+
+
+
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        input{
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+
+
+            &:focus{
+                outline-color: orange;
+            }
+        }
+
+        .submitInput{
+            background: linear-gradient(to bottom,#f7dfa5,#f0c14b);
+            cursor: pointer;
+        }
+        
+
+    }
+
+}

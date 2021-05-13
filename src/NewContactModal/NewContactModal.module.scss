@@ -1,0 +1,49 @@
+.NewContactModal{
+    position: fixed;
+    z-index: 5;
+    background-color: grey;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button{
+            cursor: pointer;
+            background-color: unset;
+            border: none;
+            outline: none;
+        }
+    }
+
+
+    form{
+        width: 500px;
+        max-width: 100%;
+        background-color: white;
+        padding: 0 10px;
+
+        input{
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px 0;
+
+        }
+    }
+
+    .createBtn{
+        padding: 10px 15px;
+        background-color: rgb(20, 20, 255);
+        color: white;
+        cursor: pointer;
+        margin: 10px 0;
+    }
+}

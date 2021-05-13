@@ -1,0 +1,89 @@
+.container{
+    
+    position: relative;
+    height: 100vh;
+    display: inline-block;
+
+}
+
+
+.SlideMenu{
+    display: flex;
+    flex-direction: column;
+    transition: 0.4s all ease-in;
+    border: 1px solid purple;
+
+    
+}
+
+.toggleMenu{
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 1px solid green;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.menuBars{
+    width: 20px;
+    height: 3px;
+    border: 1px solid green;
+
+    // &::before,&::after{
+    //     content: "";
+    //     top: 0;
+    //     position: absolute;
+    //     display: block;
+    //     margin: 10px 0;
+    //     width: 20px;
+    //     height: 100%;
+    //     background-color: red;
+
+    // }
+}
+
+.header{
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    border: 1px solid;
+
+    svg{
+        margin: 0 10px;
+        cursor: pointer;
+    }
+
+    nav{
+        position: absolute;
+        top: 25px;
+
+        button{
+            display: block;
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+}
+
+.searchContainer{
+    padding: 10px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    
+    input{
+        border: none;
+        margin: 0 10px;
+        
+        &:focus{
+            outline: none;
+        }
+    }
+}
+
+
+.rooms{
+    border: 1px solid;
+    padding: 10px;
+}

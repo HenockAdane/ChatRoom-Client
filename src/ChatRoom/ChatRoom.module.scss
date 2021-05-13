@@ -1,0 +1,55 @@
+.ChatRoom{
+    padding: 10px;
+    p,h1{color: grey;}
+    background-color: grey;
+
+}
+.utilsContainer{
+
+    input{
+        padding: 10px;
+        border-radius: 20px;
+        display: inline-block;
+        
+    
+        &:focus{
+          outline-style: none;
+        }
+    }
+
+    .messageBox{
+        width: 70%;
+        border: none;
+    }
+
+    .sendBtn{
+        width: 25%;
+        min-width: 100px;
+        cursor: pointer;
+    }
+
+}
+
+.messageContainer{
+    height: 50vh;
+    overflow-y: scroll;
+
+    p{
+        padding: 7px 20px;
+        border-radius: 20px;
+    }
+}
+
+.otherMessages{
+    color: grey;
+    background-color: white;
+}
+
+.userMessages{
+    text-align: right;
+    background-color: green;
+    color: grey;
+}
+
+
+

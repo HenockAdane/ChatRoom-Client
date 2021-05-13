@@ -1,0 +1,42 @@
+.header{
+    width: 350px;
+    display: flex;
+    border: 1px solid;
+
+    .cont{
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    svg{
+        margin: 0 10px;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    nav{
+        position: absolute;
+        top: 25px;
+        z-index: 1000;
+
+        button{
+            display: block;
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+}
+
+.newChatMenu{
+    position: absolute;
+    left: 0;
+    border: 1px solid red;
+    transition: 0.4s all ease-in;
+    z-index: 100;
+    overflow-x: hidden;
+
+
+
+} 
