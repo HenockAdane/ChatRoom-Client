@@ -9,15 +9,24 @@ export const setContacts = (contacts) => ({
     contacts
 })
 
+export const viewProfile = (userName) => ({
+    type: "VIEWPROFILE",
+    userName
+})
 
-const contacts = []
+const IS = {
+    contacts: [],
+    viewProfile: null
+}
 
-const contactReducer = (state = contacts, action) => {
+const contactReducer = (state = IS, action) => {
     switch(action.type){
         case "SETCONTACTS":
-            return action.contacts
+            return {...state, contacts: action.contacts}
         case "ADDCONTACT":
-            return [...state, action.contact];
+            return {...state, contacts: [...state.contacts, action.contact]};
+        case "VIEWPROFILE":
+            return {...state, viewProfile: action.userName};
         default: return state
     }
 }

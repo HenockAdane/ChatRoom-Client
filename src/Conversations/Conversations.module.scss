@@ -46,9 +46,24 @@
 
         }
 
-        div{
+        .subDiv{
             display: flex;
             flex-direction: column;
+            position: relative;
+            width: 100%;
+
+            div{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background-color: green;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
             
         }
 
@@ -62,6 +77,8 @@
             margin: 5px 0 0 0;
             text-align: left;
         }
+
+        
     }
 
 }

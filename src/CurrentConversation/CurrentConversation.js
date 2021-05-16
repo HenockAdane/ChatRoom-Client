@@ -19,12 +19,14 @@ function CurrentConversation() {
 
 
     const unread = currentConversation?.messages.find(msg => msg.read === false)
+    console.log({unread})
+
     useEffect(() => {
         
         if(socket){
             console.log({currentConversation})
+             
             
-            console.log({unread})
             if (unread){
                 socket.emit("messagesRead", {user: currentUser.userName, conversationID: currentConversation._id})
             }
@@ -58,7 +60,14 @@ function CurrentConversation() {
             read: false
         })
 
+        setState(ps => ({
+            ...ps,
+            message: ""
+        }))
+
     }
+
+    
 
     console.log(currentConversation)
 
@@ -67,7 +76,7 @@ function CurrentConversation() {
 
     return (
         <div className={styles.CurrentConversation}>
-            {currentConversation ? <h1 style={{border: "1px solid"}}><p><FaUser />{currentConversation.users.find(user => user !== currentUser)}</p></h1> : false}
+            {currentConversation ? <h1 style={{border: "1px solid"}}><p><FaUser />{currentConversation.users.find(user => user !== currentUser.userName)}</p></h1> : false}
 
             <div className={styles.messages}>
                 {currentConversation ? currentConversation.messages.map(message =>  message.sender === currentUser.userName ? 

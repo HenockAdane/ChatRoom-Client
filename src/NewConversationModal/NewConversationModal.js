@@ -12,7 +12,7 @@ function NewConversationModal() {
     const dispatch = useDispatch()
 
     const currentUser = useSelector(state => state.userReducer.currentUser)
-    const contacts = useSelector(state => state.contactReducer)
+    const contacts = useSelector(state => state.contactReducer.contacts)
 
 
     const [state, setState] = useState(() => ({

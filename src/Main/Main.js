@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import io from "socket.io-client"
 import styles from "../Main/Main.module.scss"
 import Sidebar from '../Sidebar/Sidebar';
@@ -9,6 +9,9 @@ import { setContacts, addContact } from "../Redux/Contact"
 import {addRequest, setRequests, removeFriendRequest} from "../Redux/FriendRequests"
 import {setSocket} from "../Redux/Socket"
 import {currentConversation, createNewConversation} from '../Redux/Conversation'
+import ReactAudioPlayer from 'react-audio-player';
+import ContactInfo from "../ContactInfo/ContactInfo"
+
 
 
 
@@ -22,6 +25,11 @@ function Main() {
     const currentConversation = useSelector(state => state.conversationReducer.currentConversation)
     const conversations = useSelector(state => state.conversationReducer.conversations)
     const Ssocket = useSelector(state => state.socketReducer)
+    const viewProfile = useSelector(state => state.contactReducer.viewProfile)
+
+    const [state, setState] = useState(() => ({
+        notification: false
+    }))
 
     useEffect(()=> {
 
@@ -76,6 +84,22 @@ function Main() {
         socket.on("recieveMessage", data => {
             console.log(data)
 
+            if(data.sender !== currentUser.userName){
+
+                setState(ps => ({
+                    ...ps,
+                    notification: false
+                }))
+
+               
+                setState(ps => ({
+                    ...ps,
+                    notification: true
+                }))
+                
+
+            }
+
 
 
             dispatch(updateConversation(data))
@@ -83,7 +107,6 @@ function Main() {
         })
 
         socket.on("messageRecieved", data => {
-            alert(12)
             console.log(data)
             dispatch(messageRecieved(data))
         })
@@ -119,7 +142,9 @@ function Main() {
             console.log({unrecieved})
     
     
-            Ssocket.emit("messageRecieved", {conversationIDs: unrecieved, currentUser: currentUser.userName})
+            if (unrecieved.length > 0){
+                Ssocket.emit("messageRecieved", {conversationIDs: unrecieved, currentUser: currentUser.userName})
+            }
 
             
         }
@@ -129,8 +154,16 @@ function Main() {
     },[conversations])
     return (
         <div className={styles.Main}>
+
+            {state.notification ? <ReactAudioPlayer
+                src="/bbm_notification.mp3"
+                autoPlay={true}
+                style={{display: "none"}}
+                /> : false}
+
             <Sidebar />
             <CurrentConversation />
+            {viewProfile ? <ContactInfo userName={viewProfile} /> : false}
         </div>
     )
 }

@@ -100,11 +100,9 @@ const readMessages = (conversations,data) => {
 
 const messagesRecieved = (conversations, currentConversation, data) => {
     const {conversationID, user} = data
-
-    alert("this function has run")
-
-    console.log("%receiveddddd","color: red; font-size: 45px;")
-
+    console.log(currentConversation)
+    console.log(conversations)
+    console.log(conversationID)
 
     if (currentConversation._id === conversationID){
         const selectedConvo = conversations.find(convo => convo._id === conversationID)
@@ -120,7 +118,7 @@ const messagesRecieved = (conversations, currentConversation, data) => {
 
         selectedConvo.messages = selectedConvo.messages.map(message => message.sender !== user && message.recieved === false ? {...message, recieved: true} : message)
 
-        return conversations.map(convo => convo._id === conversationID ? selectedConvo : convo)
+        return {conversations: conversations.map(convo => convo._id === conversationID ? selectedConvo : convo), currentConversation: currentConversation}
     }
 }
 

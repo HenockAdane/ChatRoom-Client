@@ -23,6 +23,8 @@ function Conversations() {
         return new Date(convo2.lastRecievedMessage.time) - new Date(convo1.lastRecievedMessage.time)
     })
 
+    // convo.messages.filter(message => message.read === false).length
+
 
 
     return (
@@ -30,7 +32,7 @@ function Conversations() {
 
         <h1>Conversations</h1>
 
-        {sortedConversations.map(convo => <button className={styles.convo} onClick={() => dispatch(currentConversation(convo._id))}><FaUser /><div><p1>{convo.users.find(userName => userName !== currentUser.userName)}</p1><p2>{convo.lastRecievedMessage.message}</p2></div></button>)}
+        {sortedConversations.map(convo => <button className={styles.convo} onClick={() => dispatch(currentConversation(convo._id))}><FaUser /><div className={styles.subDiv}>{convo.messages.filter(message => message.sender !== currentUser.userName && message.read === false).length > 0 ? <div><p3>{convo.messages.filter(message => message.sender !== currentUser.userName && message.read === false).length}</p3></div> : false}<p1>{convo.users.find(userName => userName !== currentUser.userName)}</p1><p2>{convo.lastRecievedMessage.message}</p2></div></button>)}
 
 
         <button className={styles.openModal} onClick={() => openModal("newConversation")}>New Conversation</button>
