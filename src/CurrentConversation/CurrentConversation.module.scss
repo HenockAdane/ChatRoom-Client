@@ -1,12 +1,14 @@
 .CurrentConversation{
     position: relative;
     flex-grow: 1;
+    max-height: 100vh;
 
     .messages{
         display: flex;
         flex-direction: column;
         overflow-y: scroll;
-        height: 500px;
+        height: 400px;
+        
 
         div{
             border: 1px solid;

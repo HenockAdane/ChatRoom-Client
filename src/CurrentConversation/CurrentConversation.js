@@ -15,7 +15,10 @@ function CurrentConversation() {
 
     const currentConversation = useSelector(state => state.conversationReducer.currentConversation)
     const currentUser = useSelector(state => state.userReducer.currentUser)
+    const contacts = useSelector(state => state.contactReducer.contacts)
     const socket = useSelector(state => state.socketReducer)
+
+    
 
 
     const unread = currentConversation?.messages.find(msg => msg.read === false)
@@ -56,7 +59,7 @@ function CurrentConversation() {
             sender: currentUser.userName,
             conversationID: currentConversation._id ,
             message: state.message,            
-            time: `${new Date().getMonth()}/${new Date().getDay()}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`,
+            time: `${new Date().getMonth()}/${new Date().getDay()}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}:${new Date().getMilliseconds()}`,
             read: false
         })
 
@@ -70,7 +73,13 @@ function CurrentConversation() {
     
 
     console.log(currentConversation)
-
+    
+    let isContact = null
+    
+    if (currentConversation){
+        const otherUser = currentConversation.users.find(user => user !== currentUser.userName)
+        isContact = contacts.find(contact => contact === otherUser)
+    }
 
 
 
@@ -91,12 +100,14 @@ function CurrentConversation() {
                     </div>
                 ) : false}
             </div>
-            <form onSubmit={sendMessage}>
+            {isContact ? <form onSubmit={sendMessage}>
                 <input type="text" className={styles.messageInput} placeholder="Type A Message" name="message" value={state.message} onChange={setInputValueToState} />
                 <input type="submit" className={styles.sendBtn} value="Send" />
-            </form>
+            </form> : currentConversation ? <form><input type="text" className={styles.messageInput} placeholder="You can not send to or recieve messages from this person as you are not friends" name="message" disabled="true" style={{padding: "10px 0"}} /></form>: false}
         </div>
     )
 }
+
+
 
 export default CurrentConversation

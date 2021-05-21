@@ -28,6 +28,7 @@ function App() {
   // socket.on("checked", (data)=> {
   //   console.log(data)
   // })
+  //check
 
   console.log(1)
 const zs = "zs"
@@ -65,6 +66,8 @@ const zs = "zs"
     }    
 
   }, [dispatch])
+
+  console.log(process.env.REACT_APP_API)
 
  
 

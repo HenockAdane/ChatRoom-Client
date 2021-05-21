@@ -10,6 +10,8 @@ function ContactInfo(props) {
 
     const currentUser = useSelector(state => state.userReducer.currentUser)
     const socket = useSelector(state => state.socketReducer)
+    const conversations = useSelector(state => state.conversationReducer.conversations)
+
 
     const [state, setState] = useState(() => ({
         contact: null
@@ -47,6 +49,19 @@ function ContactInfo(props) {
             otherUser: props.userName
         })
     }
+
+    const clearConversation = () => {
+        console.log(conversations[0].users)
+        console.log(props.userName)
+        console.log(currentUser.userName)
+        const conversationID = conversations.find(convo => convo.users.includes(props.userName))._id
+        console.log(conversationID)
+
+        socket.emit("clearConversation", {
+            userName: currentUser.userName,
+            conversationID: conversationID
+        })
+    }
     return (
         state.contact ? <div className={styles.ContactInfo}>
 
@@ -63,9 +78,9 @@ function ContactInfo(props) {
                 
                 <p>{state.contact.status}</p>
 
-                <button type="button" className={styles.btns} onClick={removeFriend}><HiBan/><p>Block</p></button>
+                <button type="button" className={styles.btns} onClick={removeFriend}><HiBan/><p>Remove Friend</p></button>
                 <button type="button" className={styles.btns}><FaThumbsDown/><p>Report Contact</p></button>
-                <button type="button" className={styles.btns}><ImBin2 /><p>Delete chat</p></button>
+                <button type="button" className={styles.btns} onClick={clearConversation}><ImBin2 /><p>Delete chat</p></button>
 
             </div>
             

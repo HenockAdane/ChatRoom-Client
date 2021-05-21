@@ -109,9 +109,6 @@ function NewContactModal() {
                 </div>
 
                 <div>
-                    <p>ID</p>
-                    <input type="text" placeholder="Enter User ID" name="userID" onChange={setInputValueToState} value={state.userID} />
-
                     <p>Name</p>
                     <input type="text" placeholder="Enter User Name" name="userName" onChange={setInputValueToState} value={state.userName} />
 

@@ -21,6 +21,11 @@ export const updateConversation = (data) => ({
     data
 })
 
+export const clearConversation = (conversationID) => ({
+    type: "CLEARCONVERSATION",
+    conversationID
+})
+
 export const readMessage = (data) => ({
     type: "READMESSAGES",
     data
@@ -122,6 +127,22 @@ const messagesRecieved = (conversations, currentConversation, data) => {
     }
 }
 
+const clearConversations = (state, conversationID) => {
+    const {conversations, currentConversation} = state
+
+        let updatedConversations = []
+
+    if (currentConversation && conversationID === currentConversation._id){
+        updatedConversations = conversations.map(convo => convo._id === conversationID ? {...convo, messages: []} : convo)
+        return {conversations: updatedConversations, currentConversation: {...currentConversation, messages: []} }
+    }
+
+    else{
+        updatedConversations = conversations.map(convo => convo._id === conversationID ? {...convo, messages: []} : convo)
+        return {conversations: updatedConversations, currentConversation: currentConversation}
+    }
+}
+
 
 
 const IS = {
@@ -141,6 +162,8 @@ const conversationReducer = (state = IS, action) => {
             return {...state, currentConversation: setCurrentConversationFunction(state.conversations, action.conversationID)};
         case "UPDATECONVERSATION":
             return updateConversations(state.conversations, state.currentConversation, action.data);
+        case "CLEARCONVERSATION":
+            return clearConversations(state, action.conversationID);
         case "READMESSAGES":
             return readMessages(state.conversations, action.data);
         case "MESSAGESRECIEVED":

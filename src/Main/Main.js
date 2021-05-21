@@ -4,7 +4,7 @@ import styles from "../Main/Main.module.scss"
 import Sidebar from '../Sidebar/Sidebar';
 import CurrentConversation from "../CurrentConversation/CurrentConversation"
 import { useDispatch, useSelector } from 'react-redux';
-import {updateConversation, setConversations, readMessage, messageRecieved} from "../Redux/Conversation"
+import {updateConversation, setConversations, readMessage, messageRecieved, clearConversation} from "../Redux/Conversation"
 import { setContacts, addContact } from "../Redux/Contact"
 import {addRequest, setRequests, removeFriendRequest} from "../Redux/FriendRequests"
 import {setSocket} from "../Redux/Socket"
@@ -55,16 +55,30 @@ function Main() {
 
         socket.emit("loadAccount", currentUser.chats)
 
-        socket.emit("loadConversations", currentUser.conversations)
+        socket.emit("loadConversations", currentUser.userName)
 
         socket.on("loadConversations", conversations => {
+            console.log({conversations})
             dispatch(setConversations(conversations))
+        })
+
+        socket.on("clearConversation", conversationID => {
+            dispatch(clearConversation(conversationID))
         })
 
         
 
-        socket.on("friendRequest", request => {
-            dispatch(addRequest(request))
+        socket.on("friendRequest", data => {
+            const {error} = data
+
+            if (error){
+                alert("user does not exist")
+            }
+
+            else{
+                dispatch(addRequest(data))
+            }
+            
         })
 
         socket.on("removeFriendRequest", userName => {
@@ -83,6 +97,7 @@ function Main() {
 
         socket.on("recieveMessage", data => {
             console.log(data)
+            alert("h")
 
             if(data.sender !== currentUser.userName){
 

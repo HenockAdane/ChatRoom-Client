@@ -23,6 +23,8 @@ function Conversations() {
         return new Date(convo2.lastRecievedMessage.time) - new Date(convo1.lastRecievedMessage.time)
     })
 
+    console.log({sortedConversations})
+
     // convo.messages.filter(message => message.read === false).length
 
 
