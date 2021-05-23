@@ -1,19 +1,12 @@
 import './App.css';
 import {useEffect} from "react"
-import Home from './Home/Home';
 import SignIn from './SignIn/SignIn'
 import SignUp from './SignUp/SignUp'
-import ChatRoom from './ChatRoom/ChatRoom'
 import {Switch, Redirect, Route} from "react-router-dom"
 import { useSelector } from 'react-redux';
 import {updateUser} from "./Redux/User"
 import AccountConfirmation from './AccountConfirmation/AccountConfirmation';
 import {useDispatch} from "react-redux"
-import Header from './Header/Header';
-import SlideMenu from './SlideMenu/SlideMenu';
-import All from './All';
-import Sidebar from './Sidebar/Sidebar';
-import CurrentConversation from "./CurrentConversation/CurrentConversation"
 import Main from './Main/Main';
 
 

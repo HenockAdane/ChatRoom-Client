@@ -2,12 +2,13 @@ import React, {useState} from 'react'
 import Contacts from '../Contacts/Contacts'
 import Conversations from '../Conversations/Conversations'
 import styles from "../Sidebar/Sidebar.module.scss"
-import {AiOutlineClose} from "react-icons/ai"
+// import {AiOutlineClose} from "react-icons/ai"
 import {useSelector, useDispatch} from "react-redux"
 import {updateUser} from "../Redux/User"
 import NewContactModal from '../NewContactModal/NewContactModal'
 import NewConversationModal from "../NewConversationModal/NewConversationModal"
 import FriendRequests from '../FriendRequests/FriendRequests'
+import Blocked from '../Blocked/Blocked'
 
 
 function Sidebar() {
@@ -52,9 +53,11 @@ function Sidebar() {
             <input className={styles.tabOptions} style={state.currentTab === "contacts" ? {backgroundColor: "white", color: "grey"} : {backgroundColor: "#EFEFEF", color: "blue"}}  type="button" name="contacts" onClick={changeTab} value="Contacts" />
 
             <input className={styles.tabOptions} style={state.currentTab === "requests" ? {backgroundColor: "white", color: "grey"} : {backgroundColor: "#EFEFEF", color: "blue"}}  type="button" name="requests" onClick={changeTab} value="Requests" />
+
+            <input className={styles.tabOptions} style={state.currentTab === "blocked" ? {backgroundColor: "white", color: "grey"} : {backgroundColor: "#EFEFEF", color: "blue"}}  type="button" name="blocked" onClick={changeTab} value="Blocked" />
         </nav>
 
-        {state.currentTab === "conversations" ? <Conversations /> : state.currentTab === "contacts" ? <Contacts /> : <FriendRequests />}
+        {state.currentTab === "conversations" ? <Conversations /> : state.currentTab === "contacts" ? <Contacts /> : state.currentTab === "requests" ? <FriendRequests /> : <Blocked />}
         
         {newConversationModalOpen ? <NewConversationModal /> : false}
         {newContactModalOpen ? <NewContactModal /> : false}

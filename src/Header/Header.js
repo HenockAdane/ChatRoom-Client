@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux"
 import {updateUser} from "../Redux/User"
 import {updateRoom} from "../Redux/Room"
-import {BsSearch, BsThreeDotsVertical, BsFillChatSquareDotsFill,  BsCircle} from "react-icons/bs"
+import { BsThreeDotsVertical, BsFillChatSquareDotsFill,  BsCircle} from "react-icons/bs"
 import styles from "../Header/Header.module.scss"
 
 
@@ -31,7 +30,7 @@ function Header(props) {
                 rooms: data
             }))
         })
-    }, [])
+    }, [currentUser._id])
 
     const toggleNavDisplay = () => {
         if (state.navDisplay === "none"){

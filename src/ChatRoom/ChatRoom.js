@@ -8,9 +8,6 @@ function ChatRoom(props) {
 
     const currentUser = useSelector(state => state.userReducer.currentUser)
 
-    const currentRoom = useSelector(state => state.roomReducer.currentRoom)
-
-    
 
 
     const [state, setState] = useState(()=> ({

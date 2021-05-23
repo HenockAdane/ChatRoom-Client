@@ -28,7 +28,7 @@ function NewConversationModal() {
 
 
     const setInputValueToState = (e) => {
-        const {value, name} = e.target
+        const {value} = e.target
 
         console.log(value)
         const exists = state.contacts.find(contact => value === contact)

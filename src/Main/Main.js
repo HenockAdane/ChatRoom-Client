@@ -5,7 +5,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import CurrentConversation from "../CurrentConversation/CurrentConversation"
 import { useDispatch, useSelector } from 'react-redux';
 import {updateConversation, setConversations, readMessage, messageRecieved, clearConversation} from "../Redux/Conversation"
-import { setContacts, addContact } from "../Redux/Contact"
+import { setContacts, addContact, removeContact, setBlocked, blockContact, unblockUser, viewProfile } from "../Redux/Contact"
 import {addRequest, setRequests, removeFriendRequest} from "../Redux/FriendRequests"
 import {setSocket} from "../Redux/Socket"
 import {currentConversation, createNewConversation} from '../Redux/Conversation'
@@ -25,11 +25,24 @@ function Main() {
     const currentConversation = useSelector(state => state.conversationReducer.currentConversation)
     const conversations = useSelector(state => state.conversationReducer.conversations)
     const Ssocket = useSelector(state => state.socketReducer)
-    const viewProfile = useSelector(state => state.contactReducer.viewProfile)
+    const focusUser = useSelector(state => state.contactReducer.viewProfile)
 
     const [state, setState] = useState(() => ({
         notification: false
     }))
+
+    console.log(...[])
+
+    // const a = async () => {
+    //     try{
+    //         throw new Error(511)
+
+    //     }catch(error){
+    //         alert(error)
+    //         console.log({error})
+    //     }
+    // }
+
 
     useEffect(()=> {
 
@@ -39,6 +52,7 @@ function Main() {
         console.log(socket.id)
 
         dispatch(setContacts(currentUser.contacts))
+        dispatch(setBlocked(currentUser.blocked))
         dispatch(setSocket(socket))
         dispatch(setRequests(currentUser.friendRequests))
 
@@ -64,15 +78,24 @@ function Main() {
 
         socket.on("clearConversation", conversationID => {
             dispatch(clearConversation(conversationID))
+            dispatch(viewProfile(null))
+            
+            
+
         })
 
         
 
         socket.on("friendRequest", data => {
-            const {error} = data
+            const error = data
+            console.log({error})
 
-            if (error){
+            if (error === 404){
                 alert("user does not exist")
+            }
+
+            else if (error === 200){
+                alert("a user is already friends")
             }
 
             else{
@@ -90,6 +113,18 @@ function Main() {
             dispatch(removeFriendRequest(friend))
         })
 
+        socket.on("removeContact", userName => {
+            dispatch(removeContact(userName))
+        })
+
+        socket.on("blockContact", userName => {
+            dispatch(blockContact(userName))
+        })
+
+        socket.on("unblockUser", userName => {
+            dispatch(unblockUser(userName))
+        })
+
         socket.on("messagesRead", data => {
             console.log(data)
             dispatch(readMessage(data))
@@ -97,7 +132,6 @@ function Main() {
 
         socket.on("recieveMessage", data => {
             console.log(data)
-            alert("h")
 
             if(data.sender !== currentUser.userName){
 
@@ -140,6 +174,10 @@ function Main() {
 
     }, [])
 
+    // if (viewProfile === null){
+    //     alert("nulllll")
+    // }
+
     useEffect(()=> {
         const unrecieved = []
         console.log(conversations)
@@ -178,7 +216,7 @@ function Main() {
 
             <Sidebar />
             <CurrentConversation />
-            {viewProfile ? <ContactInfo userName={viewProfile} /> : false}
+            {focusUser ? <ContactInfo userName={focusUser} /> : false}
         </div>
     )
 }

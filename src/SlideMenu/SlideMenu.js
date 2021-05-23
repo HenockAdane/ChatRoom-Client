@@ -9,12 +9,12 @@ function SlideMenu() {
         navDisplay: "none"
     }))
 
-    const toggleDisplay = () => {
-        setState(ps => ({
-            ...ps,
-            toggleDisplay: !ps.toggleDisplay
-        }))
-    }
+    // const toggleDisplay = () => {
+    //     setState(ps => ({
+    //         ...ps,
+    //         toggleDisplay: !ps.toggleDisplay
+    //     }))
+    // }
 
     const toggleNavDisplay = () => {
         if (state.navDisplay === "none"){

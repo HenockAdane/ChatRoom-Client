@@ -1,5 +1,3 @@
-import Conversations from "../Conversations/Conversations"
-
 export const setConversations = (conversations) => ({
     type: "SETCONVERSATIONS",
     conversations

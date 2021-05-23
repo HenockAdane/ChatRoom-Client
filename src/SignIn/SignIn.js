@@ -9,8 +9,8 @@ function SignIn() {
     const dispatch = useDispatch()
 
     const [state, setState] = useState(()=> ({
-        userNameOrEmail: "odfjplwixofbmodcwy@kiabws.com",
-        password: "odfjplwixofbmodcwy@kiabws.com",
+        userNameOrEmail: "User",
+        password: "User",
         rememberMe: false
     }))
 

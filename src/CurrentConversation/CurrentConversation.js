@@ -38,7 +38,7 @@ function CurrentConversation() {
         console.log(currentConversation)
 
         console.log("rerendered")
-    }, [unread])
+    }, [unread, socket, currentUser.userName, currentConversation ])
 
   
 
@@ -81,6 +81,10 @@ function CurrentConversation() {
         isContact = contacts.find(contact => contact === otherUser)
     }
 
+    // const deleteMsg = () => {
+        
+    // }
+
 
 
     return (
@@ -94,9 +98,15 @@ function CurrentConversation() {
                         {message.read ? <span><TiTick style={{color: "green"}}/>
                             <TiTick style={{color: "green"}}/></span> : message.recieved ? <span><TiTick />
                             <TiTick /></span> :<span><TiTick /></span>}
+                            <div className={styles.options}>
+                                <button>Delete</button>
+                            </div>
                     </div> : 
                     <div className={styles.otherMessage}>
-                        <p>{message.message}</p>                        
+                        <p>{message.message}</p>
+                        <div className={styles.options}>
+                            <button>Delete</button>
+                        </div>                        
                     </div>
                 ) : false}
             </div>

@@ -3,7 +3,6 @@ import styles from "../FriendRequests/FriendRequests.module.scss"
 import { ImCross } from 'react-icons/im';
 import { TiTick } from 'react-icons/ti';
 import { useSelector } from 'react-redux';
-import {FaUser} from "react-icons/fa"
 
 
 function FriendRequests() {

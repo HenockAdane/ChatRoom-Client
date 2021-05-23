@@ -3,7 +3,7 @@ import styles from "../NewContactModal/NewContactModal.module.scss"
 import {showModal} from "../Redux/Modal"
 import {useDispatch, useSelector} from "react-redux"
 import {AiOutlineClose} from "react-icons/ai"
-import {addContact} from "../Redux/Contact"
+// import {addContact} from "../Redux/Contact"
 
 
 function NewContactModal() {
